@@ -1,0 +1,52 @@
+#Copyright IBM Corp. 2017. All Rights Reserved.
+#Licensed under "The MIT License (MIT)"
+#      Licensed Materials - Property of IBM
+#
+#      © IBM Corp. 2016
+
+policy: 1.0.0
+
+info:
+  title: Throttling
+  name: throttling
+  version: 2.0.0
+  description: Policy to Throttling inside of an API
+  contact:
+        name: Chris Phillips
+        email: chris.phillips@uk.ibm.com
+
+
+attach:
+    - rest
+    - soap
+
+properties:
+    $schema: "http://json-schema.org/draft-04/schema#"
+    type: object
+    properties:
+        key:
+            label: Throttling Rate Name
+            description: Name of the Throtling Rate, if multiple policies share the name in datapower they share the token limit.
+            type: string
+        token:
+            label: Message Count
+            description: Maximum number of messages in the period set below.
+            type: number
+        interval:
+             label: Time Period in seconds
+             description: The time period before the count resets.
+             type: number
+        intervalType:
+              label: Interval Type
+              description: The fixed interval is a discrete block of time. The rolling interval is a sliding time-window that is relative to the time when a request is received
+              enum:
+                - fixed
+                - rolling
+              default: fixed
+              type: string
+    required:
+      - interval
+      - token
+      - key
+gateways:
+    - datapower-gateway

@@ -1,0 +1,38 @@
+swagger: '2.0'
+info:
+  x-ibm-name: throttling-unittest
+  title: Throttling-UnitTest
+  version: 1.0.0
+schemes:
+  - https
+host: $(catalog.host)
+basePath: /throttling-unittest_stamp
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions: {}
+security:
+  - {}
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  phase: realized
+  assembly:
+    execute:
+      - throttling:
+          intervalType: fixed
+          version: 1.0.0
+          key: autoTest_stamp
+          token: 1
+          interval: 20
+paths:
+  /test:
+    get:
+      responses:
+        '200':
+          description: 200 OK
+definitions: {}
+tags: []
